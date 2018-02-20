@@ -18,7 +18,7 @@ Dialogue System和Chatbot都有其比较特定的含义，这里避开并使用�
 
 ## 从机器人的角度来看Conversational Robot
 
-![从机器人的角度来看Conversational Robot](从机器人的角度来看Conversational Robot.png)
+![从机器人的角度来看ConversationalRobot](从机器人的角度来看Conversational Robot.png)
 
 从机器人的角度来讲，一个智能体（Intelligent Agent），从外界环境接受信息，这个信息主要的一个信息来源就是人。而人能提供例如语音（说话），语言（微信打字），视频（机器视觉），动作（动作、手势识别）等信息。
 
@@ -44,7 +44,7 @@ Conversational Robot = Dialogue System + QA System + Chabot + Other Needed Suppo
 一个传统的Dialogue System如下图所示
 (Jason D. Williams, The Dialog State Tracking Challenge Series: A Review, 2016)
 
-![Principal components of a spoken dialog system](Principal components of a spoken dialog system.png)
+![Principal components of a spoken dialog system](PrincipalComponentsOfASpokenDialogSystem.png)
 
 ### ASR
 
@@ -135,7 +135,7 @@ INTENT是`send_text`，
 这些列表可能类似下面的行为，其中Usr列打对号的就是用户可能产生的行为列表，我们以后会在单独的`NLU`相关章节详细探讨这部分内容。
 (Steve Young, The Hidden Information State model: A practical framework for POMDP-based spoken dialogue management, 2010)
 
-![The principal dialogue acts used by the HIS System](The principal dialogue acts used by the HIS System.png)
+![The principal dialogue acts used by the HIS System](ThePrincipalDialogueActsUsedByTheHISSystem.png.png)
 
 ### Dialogue State Tracker & Dialogue Policy
 
