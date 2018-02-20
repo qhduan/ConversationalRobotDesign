@@ -15,9 +15,6 @@ mail (a) qhduan.com
 
 [导论：什么是我所说的ConversationalRobot](/什么是我所说的ConversationalRobot)
 
-参考资料：
-
-[参考资料](/参考资料.md)
 
 # 谁关注 Conversational System ， 参考资料
 
@@ -74,7 +71,9 @@ http://web.stanford.edu/~jurafsky/slp3/
 
 https://research.fb.com/downloads/babi/
 
+### 作者的其他相关链接
 
+[Sequence-to-Sequence模型的一个实现](https://github.com/qhduan/just_another_seq2seq)
 
 
 ---
