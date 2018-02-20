@@ -13,9 +13,11 @@ mail (a) qhduan.com
 
 文章列表：
 
-
 [导论：什么是我所说的ConversationalRobot](/什么是我所说的ConversationalRobot)
 
+参考资料：
+
+[参考资料](/参考资料.md)
 
 ---
 

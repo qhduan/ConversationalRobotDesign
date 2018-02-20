@@ -1,6 +1,10 @@
 
 
-# 导论：什么是我所说的ConversationalRobot
+# 导论：什么是我所说的 Conversational Robot
+
+包括 Dialogue System, QA System, Chatbot 简述。
+下面大部分文字是整体的介绍，当然要完全把这三个部分都详细说完，可能就够一本书了，没几百篇论文的阅读出不来。
+主要是因为每个系统的每个实现方法经常都是独立的一个领域，而很少有介绍完整成品的东西，也几乎没有完整的书籍。
 
 ## Conversational Robot 的来历
 
@@ -249,7 +253,7 @@ inform的格式：`inform(a=x, b=y)`
 
 所以DST和DP部件，主要是管理历史状态，并且根据状态生成一个`sys_action`，系统所要应对的行为。
 
-### NLG
+### 自然语言生成 NLG
 
 自然语言生成部件的主要目的是根据系统的相应类型，生成自然语言回答。
 
@@ -257,15 +261,15 @@ inform的格式：`inform(a=x, b=y)`
 
 当然现在也有一些使用如seq2seq模型等等产生的NLG方法。这些方法的出现一来是为了提高系统的鲁棒性，另一方面是希望系统说话更接近人类说话方式，最终提高用户体验。
 
-### TTS
+### 语音合成 TTS
 
 这部分是指从文字到语音合成的部分，并不在我所定义的Conversational Robot的范畴内。绝大部分Dialogue System或其他相关文献也都会忽略，因为模块本身可以独立运作，并且有比较成熟的解决方案。
 
-## QA System
+## 问答系统 QA System
 
 这里简单探讨QA系统的几种形式
 
-### Question & Answer Selection/Matching/Searching
+### 问答匹配 Question & Answer Selection/Matching/Searching
 
 假设我们有一堆问答对`(q_1, a_1, q_2, a_2, ..., q_n, a_n)`
 
@@ -330,7 +334,7 @@ https://zh.wikipedia.org/zh-hant/阿尔伯特·爱因斯坦
 - 猜测用户所希望的答案类型（是人？地点？时间？其他？）
 
 
-### knowledge-based
+### Knowledge-based
 
 当然也可以说语义网、知识图谱等based
 
@@ -355,18 +359,18 @@ https://zh.wikipedia.org/zh-hant/阿尔伯特·爱因斯坦
 
 从这个角度解决QA问题有一套比较完整的方法论，如RDF，Semantic Web，SPARQL等技术和方法
 
-也有一些文献使用了结合deep learning与sequence-to-sequence等技术的的knowledge-based解决方案，具体内容我们后续会讨论。
+也有一些文献使用了结合deep learning与sequence-to-sequence等技术的的Knowledge-based解决方案，具体内容我们后续会讨论。
 
 
 ## Chatbot
 
-这里chatbot特指中文的闲聊机器人
+这里Chatbot特指中文的闲聊机器人
 
 闲聊机器人是带有一定“娱乐”意味的机器人。当然也可以用作例如心理辅导，心理帮助，婴幼儿教育，儿童陪伴等等内容。
 
-这部分就不是完成一个任务，不是需要答案，而更多的是陪伴、娱乐、放松。一个chatbot最简单的成功指标就是，本质是鼓励用户多和Chatbot交流，用户使用时长和用户下次继续使用的意愿，如果用户愿意一直陪着chatbot聊天，那就成功了。
+这部分就不是完成一个任务，不是需要答案，而更多的是陪伴、娱乐、放松。一个Chatbot最简单的成功指标就是，本质是鼓励用户多和Chatbot交流，用户使用时长和用户下次继续使用的意愿，如果用户愿意一直陪着Chatbot聊天，那就成功了。
 
-一般来说chatbot只有两种技术，template-based和neural-based
+一般来说Chatbot只有两种技术，template-based和neural-based
 
 ### template-based
 
@@ -394,7 +398,7 @@ https://zh.wikipedia.org/zh-hant/阿尔伯特·爱因斯坦
 
 这方面比较完整的研究是AIML语言，即 Artificial Intelligence Markup Language 语言。
 
-是一种XML格式的标记语言，这部分方法也是曾经试图解决图灵测试的主力研究方法。
+是一种XML格式的标记语言，这部分方法也曾经是试图解决图灵测试的主力研究方法。
 
 更多内容可以参考：
 
