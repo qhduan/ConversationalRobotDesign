@@ -244,7 +244,7 @@ request的格式：`request(a, b=x, c=y,...)`
 
 这里简单探讨QA系统的几种形式
 
-### Question & Answer pair selectiong
+### Question & Answer pair selection
 
 假设我们有一堆问答对`(q_1, a_1, q_2, a_2, ..., q_n, a_n)`
 
@@ -261,11 +261,11 @@ request的格式：`request(a, b=x, c=y,...)`
 
 那么问题来了，如何确定答案？
 
-假设我们有一个函数`f`，当两个问题相似的时候`f(a, b)`趋近于1，当两个问题不相似的时候`f(a, b)`趋近于0。
+假设我们有一个函数`f()`，当两个问题相似的时候`f(q_1, q_2)`趋近于1，当两个问题不相似的时候`f(q_1, q_2)`趋近于0。
 
 那么用户只要输入一个新问题`x`，那么我们只要从数据库里面计算`argmax {q_i} f(q_i, x)`就好了。也就是从数据库中找到与问题`x`最相似的问题。
 
-当然还有另一种类似的做法，假设一个函数`g`，当一个问题`q`和答案`a`是一对的时候（也就是`a`是`q`的正确答案），那么`g(q, a)`趋近于1，如果不是一对，则相反趋近于0。
+当然还有另一种类似的做法，假设一个函数`g()`，当一个问题`q`和答案`a`是一对的时候（也就是`a`是`q`的正确答案），那么`g(q, a)`趋近于1，如果不是一对，则相反趋近于0。
 
 当用户来了新问题x，那么我们只要遍历数据库里面的所有答案寻找`argmax{a_i} g(x, a_i)`，则可以找到，最符合用户问题的答案`a_i`
 
@@ -279,7 +279,7 @@ request的格式：`request(a, b=x, c=y,...)`
 
 此类的论文比较多，例如：
 
-(Ming Tan, LSTM-BASED DEEPLEARNING MODELS FOR NON-FACTOID ANSWER SELECTION 2016)
+(Ming Tan, LSTM-BASED DEEPLEARNING MODELS FOR NON-FACTOID ANSWER SELECTION, 2016)
 
 ### ir-based
 
@@ -327,10 +327,12 @@ Translate this page
 中国的首都 => 首都(中国, ?y)
 ```
 
-其中`出生于`和`首都`都是关系，而`中国`和`爱因斯坦`都是实体，而`?x`和`?y`都是自有变量，这里代指我们想要寻求的答案。
+其中`出生于`和`首都`都是关系，而`中国`和`爱因斯坦`都是实体，而`?x`和`?y`都是自由变量，这里代指我们想要寻求的答案。
 
 从这个角度解决QA问题有一套比较完整的方法论，如RDF，Semantic Web，SPARQL等技术和方法
 
+
+也有一些文献使用了结合deeplearning与sequence-to-sequence等技术的的knowledge-based解决方案，具体内容我们后续会讨论。
 
 
 ## Chatbot
@@ -378,4 +380,13 @@ https://www.tutorialspoint.com/aiml/index.htm
 
 是以机器翻译模型为参考，生成对话的模型
 
-基于深度学习的 sequence-to-sequence 模型，来生成对话
+基于深度学习的 sequence-to-sequence 模型，来生成对话。
+
+这类模型直接训练对话，得到端到端的结果。
+
+训练数据大部分来自于电影字幕、社交媒体，或者其他已有的对话数据
+
+这方便比较前沿的研究如
+(Jiwei Li, Adversarial Learning for Neural Dialogue Generation, 2017)
+
+具体内容我们后续会讨论。
