@@ -16,7 +16,7 @@ mail (a) qhduan.com
 [导论：什么是我所说的ConversationalRobot](/什么是我所说的ConversationalRobot)
 
 
-# 谁关注 Conversational System ， 参考资料
+# 参考资料
 
 ### 俄罗斯人：
 
