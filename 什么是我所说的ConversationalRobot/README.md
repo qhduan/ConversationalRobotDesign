@@ -95,7 +95,10 @@ Conversational Robot 特指接受语言，或者经过转换的语音数据，�
 
 ### 自然语言理解（NLU or SLU or LU）
 
-`SLU`(Spoken Language Understanding)，有的资料也称为`NLU`(Natual Language Understanding)，甚至`LU`(Language Understanding)
+这部分在有些资料被称为`SLU`(Spoken Language Understanding)，
+有的资料也称为`NLU`(Natual Language Understanding)，甚至`LU`(Language Understanding)。
+也有一些文献称之为`Semantic Decoding`，因为它的结果也被称为`Semantic Frame`，
+也就是把用户输入的句子（utterance）转换为了一种Semantic Frame，即抽象出了用户所期望行为的语义。
 
 这部分主要根据语音输入的结果，判断用户意图。
 
@@ -157,7 +160,7 @@ INTENT是`send_text`，
 
 ### Dialogue State Tracker & Dialogue Policy
 
-在某些系统上，这两部分是分离的，在某些系统上，实际就是一个部分。也有一些资料把这部分称为Dialogue Management。
+在某些系统上，这两部分是分离的，在而在很多系统上，实际就是一个部分。也有一些资料把这部分称为Dialogue Management。这部分也被称为Belief Tracking & Policy Optimization / Policy Learning。
 
 需要状态管理是因为对话并不仅仅是单轮的，而是需要多轮进行，或者说完成一个任务很可能需要跟用户反复交互。用户很可能修改之前的意图、提供的参数等等内容。如果对话只是一问一答，即当前问题和以前的问题、回答都没关系的话，那实际上就不算Dialogue System，而是QA System了（Question & Answer）
 
