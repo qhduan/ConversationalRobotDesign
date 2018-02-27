@@ -18,6 +18,37 @@ mail (a) qhduan.com
 
 # 参考资料
 
+Dialogue System / Conversational UI 可能的资料
+
+国外：
+
+wit.ai
+
+api.ai
+
+微软的 luis.ai
+
+国内：
+
+yige.ai
+
+ruyi.ai
+
+（这年头没个.ai域名都不好意思说自己是科技企业了是吧？）
+
+开源：
+
+剑桥 http://www.camdial.org/pydial/
+
+战斗民族的 https://github.com/deepmipt/DeepPavlov
+
+刚刚知道的，文档不错 rasa.com
+
+本质上比较简单的（和上面比） https://github.com/gunthercox/ChatterBot
+
+一个比较新的QA系统，里面那个论文列表不错 https://github.com/castorini/BuboQA
+
+
 ### 俄罗斯人：
 
 这个repo疑似俄罗斯人的： https://github.com/deepmipt/DeepPavlov
