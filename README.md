@@ -13,36 +13,37 @@ mail (a) qhduan.com
 
 文章列表：
 
+[对话机器人技术简介：问答系统、对话系统与聊天机器人](/对话机器人技术简介：问答系统、对话系统与聊天机器人)
+
 [导论：什么是我所说的ConversationalRobot](/什么是我所说的ConversationalRobot)
 
+施工中!!!
+
+[神经对话模型的实现与技巧](/神经对话模型的实现与技巧)
 
 # 参考资料
 
 Dialogue System / Conversational UI 可能的资料
 
-国外：
+平台：
 
-wit.ai
-
-api.ai
-
-微软的 luis.ai
-
-国内：
-
-yige.ai
-
-ruyi.ai
+- 国外
+    - wit.ai
+    - api.ai
+    - luis.ai
+- 国内
+    - yige.ai
+    - ruyi.ai
 
 （这年头没个.ai域名都不好意思说自己是科技企业了是吧？）
 
-开源：
+开源实现：
 
 剑桥 http://www.camdial.org/pydial/
 
-战斗民族的 https://github.com/deepmipt/DeepPavlov
+战斗民族 https://github.com/deepmipt/DeepPavlov
 
-刚刚知道的，文档不错 rasa.com
+文档不错 https://rasa.com
 
 本质上比较简单的（和上面比） https://github.com/gunthercox/ChatterBot
 
