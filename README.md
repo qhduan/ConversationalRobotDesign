@@ -3,10 +3,6 @@
 
 这个repo会记录我对 Conversational Robot 的理解、学习、研究、设计、实现的相关内容
 
-简单的说我所说的 Conversational Robot 是指 Dialogue System, QA System, Chatbot等
-相关技术组成的一个系统，详细可以看下面的第一篇文章
-[《导论：什么是我所说的ConversationalRobot》](/什么是我所说的ConversationalRobot)
-
 mail (a) qhduan.com
 
 微信 longinusd
@@ -19,7 +15,7 @@ mail (a) qhduan.com
 
 [聊天机器人：神经对话模型的实现与技巧](/聊天机器人：神经对话模型的实现与技巧)
 
-施工中!!!：
+施工中，有生之年系列：
 
 对话系统：自然语言理解
 
@@ -27,17 +23,17 @@ mail (a) qhduan.com
 
 对话系统：自然语言生成
 
+对话系统：完整对话系统构建
+
 聊天机器人：模板模型与AIML简介
 
 问答系统：文本检索模型
 
 问答系统：知识模型
 
-完整对话系统构建
+完整机器人实现
 
-# 参考资料
-
-Dialogue System / Conversational UI 可能的资料
+# Dialogue System / Conversational UI 可能的资料
 
 平台：
 
@@ -49,28 +45,14 @@ Dialogue System / Conversational UI 可能的资料
     - yige.ai
     - ruyi.ai
 
-（这年头没个.ai域名都不好意思说自己是科技企业了是吧？）
+开源实现（机器人相关）：
 
-开源实现：
-
-剑桥 http://www.camdial.org/pydial/
-
-战斗民族 https://github.com/deepmipt/DeepPavlov
-
-文档不错 https://rasa.com
-
-本质上比较简单的（和上面比） https://github.com/gunthercox/ChatterBot
-
-一个比较新的QA系统，里面那个论文列表不错 https://github.com/castorini/BuboQA
-
-关于AIML可以参考下这个商业公司的信息：
-https://home.pandorabots.com/en/
-
-### 俄罗斯人：
-
-这个repo疑似俄罗斯人的： https://github.com/deepmipt/DeepPavlov
-
-还有本 Neural programming of dialogue systems (Russian Edition) 在亚马逊上，不过俄语我也看不懂
+- 剑桥的开源DS [PyDial](http://www.camdial.org/pydial/)
+- 一个开源的DS [deepmipt/DeepPavlov](https://github.com/deepmipt/DeepPavlov)
+- 一个商业但开源的DS [Rasa Core](https://rasa.com)
+- 比较简单的机器人[ChatterBot](https://github.com/gunthercox/ChatterBot)
+- 一个开源的QA系统，里面那个论文列表不错 [castorini/BuboQA](https://github.com/castorini/BuboQA)
+- AIML的公司 [pandorabots](https://home.pandorabots.com/en/)
 
 ### 微软
 
@@ -83,15 +65,15 @@ https://home.pandorabots.com/en/
 (Jason D. Williams, Hybrid Code Networks: practical and efficient end-to-end dialog control
 with supervised and reinforcement learning, 2017)
 
-还有数据和挑战：
+还有数据：
 
 https://www.microsoft.com/en-us/research/event/dialog-state-tracking-challenge/
 
 ### 亚马逊
 
-alexa prize 相关的有一堆论文，例如下面这篇
+Alexa Prize 相关的有一堆论文，例如下面这篇
 
-亚马逊的这些，我觉得更偏从QA角度设计dialogue system，并不太传统
+亚马逊的这些，我觉得更偏从QA角度设计DS
 
 (Huiting Liu, RubyStar: A Non-Task-Oriented Mixture Model Dialog System, 2017)
 
@@ -109,7 +91,7 @@ http://mi.eng.cam.ac.uk/~mg436/LectureSlides/
 
 ### 斯坦福 Speech and Language Processing (3rd ed. draft)
 
-概论，28~30章
+科普向，28~30章
 
 http://web.stanford.edu/~jurafsky/slp3/
 
