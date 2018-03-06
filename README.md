@@ -21,6 +21,20 @@ mail (a) qhduan.com
 
 [神经对话模型的实现与技巧](/神经对话模型的实现与技巧)
 
+对话系统之自然语言理解
+
+对话系统之对话策略管理
+
+对话系统之自然语言生成
+
+模板模型与AIML简介
+
+问答系统之文本检索模型
+
+问答系统之知识模型
+
+完整对话系统构建
+
 # 参考资料
 
 Dialogue System / Conversational UI 可能的资料
@@ -49,6 +63,8 @@ Dialogue System / Conversational UI 可能的资料
 
 一个比较新的QA系统，里面那个论文列表不错 https://github.com/castorini/BuboQA
 
+关于AIML可以参考下这个商业公司的信息：
+https://home.pandorabots.com/en/
 
 ### 俄罗斯人：
 

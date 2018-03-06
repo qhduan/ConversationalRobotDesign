@@ -1,64 +1,123 @@
 
 # Sequence-to-Sequence 模型
 
-流程伪代码（python）
+### 模型流程
+
+input_text =>  
+encoder =>  
+decoder =>  
+target_text
+
+### Seq2Seq模型流程伪代码（python）
 
 训练时：
 
 ```python
-input_text = ['A', 'B', 'C']
 
+# 这两条是训练数据
+input_text = ['A', 'B', 'C']
 output_text = ['D', 'E', 'F']
 
+# 计算encoder的状态
+encoder_state = encoder(input_text)
+
 output_text_with_start = ['<SOS>'] + output_text
+output_text_with_end = output_text + ['<EOS>']
 
 output = []
-for decoder_input in output_text_with_start:
-    decoder_output = decoder(encoder_state, decoder_input)
+decoder_state = 0
+for decoder_input, decoder_target in zip(
+    output_text_with_start, output_text_with_end):
+    # decoder_state 相当于每轮都会更新
+    # 根据不同策略，最开始可以是 0 (例如是一个全 0 向量的状态)
+    # 然后每轮结束后，decoder_state 也会更新
+    decoder_output, decoder_state = decoder(
+        encoder_state, decoder_state, decoder_input)
     output.append(decoder_output)
 
+    # 收集loss
+    loss = loss_function(decoder_output, decoder_target)
+    # 第一个 loss 实际上相当于概率 P('D'|'<SOS>') 的损失函数
+    # 也就是给decoder输入最开始字符'SOS'，给出句子的第一个词'D'的概率，依次还有：
+    # P('E'|'D')
+    # P('F'|'E')
+    # P('<EOS>'|'F')
+    # 也即是我们分别喂给decoder： '<SOS>', 'D', 'E', 'F'
+    # 我们希望它的输出是： 'D', 'E', 'F', '<EOS>'
+
 """
-decoder(encoder_state, '<SOS>') -> 'D'
-decoder(encoder_state, 'D') -> 'E'
-decoder(encoder_state, 'E') -> 'F'
-decoder(encoder_state, 'F') -> '<EOS>'
+decoder(encoder_state, decoder_state, '<SOS>') -> 'D'
+decoder(encoder_state, decoder_state, 'D') -> 'E'
+decoder(encoder_state, decoder_state, 'E') -> 'F'
+decoder(encoder_state, decoder_state, 'F') -> '<EOS>'
 output == ['D', 'E', 'F', '<EOS>']
 """
 ```
 
-预测时
+### 预测时
 
 ```python
-input_text = ['A', 'B', 'C']
 
-output_text = ['D', 'E', 'F']
+# 这是用户输入数据
+input_text = ['床', '前', '明', '月', '光']
 
+# 计算encoder的状态
+encoder_state = encoder(input_text)
+
+# 第一个输入到decoder的字，是我们预设的'<SOS>'
+# 而后续输入到decoder的字，是上一轮decoder的输出
 last_decoder_output = '<SOS>'
 output = []
-while True:    
-    decoder_output = decoder(encoder_state, last_decoder_output)
+decoder_state = 0
+# 如果句子太长了，就是说预测句子结尾可能已经失败了
+# 则退出预测
+# 也就是循环最长也就是output_length_limit
+for _ in range(output_length_limit):
+    # decoder_state 相当于每轮都会更新
+    decoder_output, decoder_state = decoder(
+        encoder_state, decoder_state, last_decoder_output)
     output.append(decoder_output)
 
+    # 如果察觉到句子结尾，则直接退出预测
     if decoder_output == '<EOS>':
         break
 
-    if len(output) > output_length_limit:
-        break
-
-"""
-decoder(encoder_state, '<SOS>') -> 'D'
-decoder(encoder_state, 'D') -> 'E'
-decoder(encoder_state, 'E') -> 'F'
-decoder(encoder_state, 'F') -> '<EOS>'
-output == ['D', 'E', 'F', '<EOS>']
-"""
 ```
+
+### 另一种解释
+
+`['床', '前', '明', '月', '光']`这个输入，构成了encoder_state，
+decoder相当于是构建一个函数关系：
+
+下文`=>`是指左侧到右侧的单向函数映射
+
+encoder(`['床', '前', '明', '月', '光']`) => encoder_state
+
+decoder(encoder_state, `['<SOS>']`) => `'疑'`  
+decoder(encoder_state, `['<SOS>', '疑']`) => `'是'`  
+decoder(encoder_state, `['<SOS>', '疑', '是']`) => `'地'`  
+decoder(encoder_state, `['<SOS>', '疑', '是', '地']`) => `'上'`  
+decoder(encoder_state, `['<SOS>', '疑', '是', '地', '上']`) => `'霜'`  
+decoder(encoder_state, `['<SOS>', '疑', '是', '地', '上', '霜']`) => `'<EOS>'`  
 
 # 与神经机器翻译的异同
 
-## embedding不同
+神经对话模型最开始就来源于对神经翻译模型的思考，但是他们有很多不同之处。
 
-## 结果不同
+### embedding不同
+
+神经翻译模型因为是从一个语种到另一个语种的翻译，
+所以encoder和decoder的embedding往往是不同的。
+
+例如翻译数据中，英文我们取10万个词，法文取10万个词，
+我们需要建立的是两个10万的embedding，
+或者一个20万的embedding。
+
+而神经对话模型里，因为输入和输出都是一个语种，
+也就是只有英文到英文、法文到法文，所以encoder和docoder
+可以共用一个10万个词的embedding。
+
+### 结果重复性不同
 
 神经机器翻译往往是一对一的映射，一句话对应一句话，例如：
 
@@ -79,12 +138,13 @@ hello <> 你好
 你知道qhduan是帅哥吗 > 不知道  
 你知道龙傲天吗 > 不知道  
 
+上面的情况实际上在统计意义上是出现的。
 这也导致对话模型更容易出现“I don't know”问题，
-也就是模型更容易学会更好回答而不犯错的答案，任何问题都回答“我不知道”，或者类似的简单回复。
+也就是模型更容易学会更好回答而不犯错的答案，任何问题都回答“我不知道”就行了，或者类似的简单回复。
 
 所以后续的一些文献更看重神经对话模型的diversity，也就是结果多样。
 
-## 对称性不同
+### 对称性不同
 
 神经翻译模型有对称性，例如
 
@@ -102,20 +162,178 @@ chat(你是谁) = 我是你哥哥
 
 chat(我是你哥哥) != 你是谁
 
-## 语料问题
+### 语料不同，与所产生的问题
 
-## 评价标准问题
+神经机器翻译依赖平行语聊，即例如统一意思的一句话，有中文表示也有英文表示，那么这两句话的意义是平行的。
+将他们放入模型训练即可。
+
+神经对话的模型的来源不是平行预料，
+早期研究的大部分语料是来自电影、电视剧字幕。
+（例如来自OpenSubtitles）
+
+后续的来源也有：ubuntu系统的系统客服的语料、来自社交媒体的语料，等等。
+
+神经机器翻译的语料，往往可靠性更容易控制，因为一句“hello”，不太可能有太多种翻译。而神经对话模型，有人开头一句“你好”之后，很大概率之后的回答，并不是回一句“你好”，这样很正式的回答语料很少。而社交媒体之类的，更容易产生很发散的语料。这会导致神经机器翻译的语料质量普遍不高。
+
+另一方面，电影字幕语料有天然的缺陷，
+例如不好确定发言人，例如连续两句话很可能是同一人连续说的，因为长度问题分割为两句；或者是两个不相干的场景说的（即便在时间上接近）。这些问题同样也导致了语聊质量不高的问题。
+
+### 评价标准问题
+
+神经机器翻译的主要评价标准可以分为机器评价和人工评价。
+机器评价普遍使用BLEU值进行估算。人工评价则是人工打分。
+BLEU是一种自动机器评价算法，一些文献表示，BLEU分数与人类对翻译质量的判断高度相关，即BLEU高，翻译质量越高(在一定统计意义上)。
+
+虽然对于神经机器翻译模型，BLEU也不是一个完美的解决方案，但是总体来说效果可以接受。
+但是针对神经对话模型，BLEU就更加不是一个好的评价模型了，
+后续一些文献反而针对Diversity等其他指标评价模型好坏。
+
+有大量的对话机器人文献，都采用了人工评价，
+当然这也显著提高了成本。
+很多文献彻底放弃了机器评价。
 
 # 技巧与提高（trick）
 
-互信息技巧
+一些模型的普遍技巧，例如：
+Attention机制，
+Residual RNN 机制，
+Dropout 机制，
+在此不介绍。
 
-反转技巧
+### 抗语言模型与互信息模型
 
-强化学习
+在文献
+[Li et al., 2015](https://arxiv.org/pdf/1510.03055v3.pdf)
+中提到，可以通过加入互信息来提高结果的BLEU和Diversity。
 
-对抗学习
+假设我们训练语料的第一句话是S，而其他人的回复是T，例如：
 
-TFIDF技巧
+S：你今年几岁了？  
+T：野原新之助，5岁！  
 
-上下文相似技巧
+一般来说我们所训练提高的概率就是P(T|S)，损失函数log(P(T|S))
+
+##### 抗语言(anti-language)损失函数
+
+log(P(T|S)) - log(P(T))
+
+也就是我们在提高P(T|S)的同时，需要抑制P(T)
+
+解释是：如果T是经常出现的句子，例如“我不知道”，
+那么P(T)就会很高。
+所以我们需要人为降低P(T)出现的概率。
+
+##### 互信息损失函数
+
+log(P(T|S)) + log(P(S|T))
+
+解释是：提高S与T的相关性。如果T是与S完全无关的回复，例如“我不知道”，那么P(S|T)的概率就会很低，即相关性很低。
+我们的目的是奖励S与T相关性（互信息高）的训练数据。
+
+BTW：文献中结论为，抗语言模型比互信息模型的diversity高，而互信息模型的BLEU更高。
+
+### 反转技巧
+
+有很多文献指出，把输入语句反转，
+可以提高Seq2Seq模型的准确度。
+
+即不再按“床前明月光”这个顺序喂给encoder，
+而是按照“光月明前床”这个顺序。
+
+### 强化学习
+
+我们设计一些特征可以计算出reward，
+然后通过log likelihood trick，
+使用reward修正每次更新loss时的权重，
+则可以提高模型效果。
+
+[Li et al., 2016](https://arxiv.org/abs/1606.01541)
+
+### 对抗学习
+
+假设我们设计一个分类器，可以分出哪些是机器的回复，
+哪些是人的回复，
+然后就可以计算出一个对于问句质量的近似打分，
+通过log likelihood trick对loss进行修正，
+则可以提高训练效果
+
+[Li et al., 2017](https://arxiv.org/abs/1701.06547)
+
+### TFIDF技巧
+
+如果S中TFIDF相对整个batch来说的信息量较低，
+则降低这些S的权重
+
+### 上下文相似技巧
+
+降低T与S太相似的训练集权重
+
+### 分组技巧（buckets）
+
+把要输入decoder的数据，根据不同长度分组。
+例如1~5个字长的一组，6~10长度的一组，11~15长度一组。
+
+这样的好处至少有：
+decoder时的RNN解码长度在每个batch中是差不多的，
+提高整体运算效率。
+
+decoder的RNN是可以并行运行的，
+如果batch数据中的解码长度不一致，
+那么解码时间必然以最长的解码长度为准，
+那么batch中长度很短的数据会很快解码完，
+但是从系统运行效率上，还是要等待长的数据解码完。
+这样无形的降低了一定效率。
+
+# 工程级实战参考与提高
+
+### 训练不同情绪的bot
+
+假设我们有了一个语料的情绪分类器（sentiment classifier）
+
+那么我们可以把语料分为不同的情绪，
+然后结合一些trick，
+例如给训练数据添加一些标签，例如：
+
+S: [happy] 你 好  
+T: 你好啊！偶好开心！
+
+S: [sad] 你 好  
+T: 哦……你来啦  
+
+S: [angry] 你 好  
+T: 你滚啦！  
+
+这样把标签后的数据输入一个模型训练，
+使用时只要给用户的输入加入不同的标签，
+则可以得到不同情绪的机器返回结果。
+
+当然了，你也可以直接根据不同情感训练多个模型，
+具体怎么做好需要实际测试。
+
+### 语料处理
+
+- 去除重复语料
+- 去除非目标文字语料
+    - 例如中文训练集去掉句子中包含英文的语料
+- 去除太短的语料
+- 去除太长的语料
+- 去除特殊符号太多的语料
+
+### 训练多个模型
+
+把语料根据来源或者语料本身，
+使用某种无监督聚类机制来把语料分类。
+
+例如你的语料来自电影字幕，
+可以根据这个电影的所有字幕来把语料无监督分类，
+这样结果就是例如可以分为：动作片字幕、爱情片字幕、动作爱情片字幕……等等不同语料组
+
+然后用不同语料训练多个模型，
+使用前预判哪个模型更优秀，
+或者根据不同场景使用不同模型（ensemble）。
+
+### 如果可能的话，避免（现在）使用神经对话模型
+
+如题。
+
+更多考虑传统技术，如AIML等技术。
