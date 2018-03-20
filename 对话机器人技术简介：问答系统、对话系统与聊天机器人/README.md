@@ -140,26 +140,34 @@ IR-based 问答系统 (IR: Information Retrieval)
 
 一个典型的对话系统的交互过程是这样的：
 
-用户：你好（用户意图：greeting）  
-机器：你好，我可以帮助你搜索并预订餐厅（系统意图：greeting）  
-用户：我想要找一家在中央公园2.0附近的意大利餐厅（用户意图：inform(地址=中央公园2.0，口味=意大利)）  
-机器：请问你想要在中央公园2.0附近什么价位的意大利餐厅？（系统意图：request(价位)）  
-用户：普通的就好（用户意图：inform(价位=普通)）  
-机器：我知道那里有一家柯南家的老意大利料理餐厅（系统意图：inform(名称=柯南家的老意大利料理)）  
-用户：换一个（用户意图：alter()）  
-机器：我知道那里有一家意大利油泼面餐厅（系统意图：inform(名称=意大利油泼面)）  
-用户：它家的价格怎么样？（用户意图：request(价位)）  
-机器：意大利油泼面的价位是普通（系统意图：inform(价位=普通)）  
-用户：就这家吧，帮我预订（用户意图：order()）  
-机器：请问有几个人？（系统意图：request(人数)）  
-用户：单身狗（用户意图：inform(人数=1)）  
-机器：真的就1个人吗？（系统意图：confirm(人数=1)）  
-用户：是的（用户意图：confirm()）  
-机器：已经预定成功（系统意图：order_success()）  
-用户：好的，再见（用户意图：bye()）  
-机器：再见，欢迎下次使用（系统意图：bye()）
+用户：你好（User Dialog Act：greeting）  
+机器：你好，我可以帮助你搜索并预订餐厅（Sys Dialog Act：greeting）  
+用户：我想要找一家在中央公园2.0附近的意大利餐厅（User Dialog Act：inform(地址=中央公园2.0，口味=意大利)）  
+机器：请问你想要在中央公园2.0附近什么价位的意大利餐厅？（Sys Dialog Act：request(价位)）  
+用户：普通的就好（User Dialog Act：inform(价位=普通)）  
+机器：我知道那里有一家柯南家的老意大利料理餐厅（Sys Dialog Act：inform(名称=柯南家的老意大利料理)）  
+用户：换一个（User Dialog Act：alter()）  
+机器：我知道那里有一家意大利油泼面餐厅（Sys Dialog Act：inform(名称=意大利油泼面)）  
+用户：它家的价格怎么样？（User Dialog Act：request(价位)）  
+机器：意大利油泼面的价位是普通（Sys Dialog Act：inform(价位=普通)）  
+用户：就这家吧，帮我预订（User Dialog Act：order()）  
+机器：请问有几个人？（Sys Dialog Act：request(人数)）  
+用户：单身狗（User Dialog Act：inform(人数=1)）  
+机器：真的就1个人吗？（Sys Dialog Act：confirm(人数=1)）  
+用户：是的（User Dialog Act：confirm()）  
+机器：已经预定成功（Sys Dialog Act：order_success()）  
+用户：好的，再见（User Dialog Act：bye()）  
+机器：再见，欢迎下次使用（Sys Dialog Act：bye()）
 
-上文出现的“用户意图”，是对话系统的自然语言理解部件（NLU）所解析出来的用户的潜在意图。而“系统意图”是对话系统的对话策略部件（dialog policy）根据各种信息判断并生成的一种系统行为（action）。
+Dialog Acts 如果是用户发起的（User Dialog Act），那么它是一种处理后的用户意图的某种系统化表达。
+The dialog act expresses an important component of the intention of the speaker (or writer) in saying what they said
+
+系统发起的行为，是根据用户行为，上下文信息等等综合得出的，下一步所要进行的操作系统化表达。
+（这句话说的好像不太对）
+Asking questions, giving orders, or making informational statements are things that people do in conversation, yet dealing with these kind of actions in dialogue what we will call dialog acts is something that the GUS-style frame-based dialog systems
+
+    GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel G. Bobrow, GUS, A Frame-Driven Dialog System, 1977)
+
 
 常见的不同意图有：
 
