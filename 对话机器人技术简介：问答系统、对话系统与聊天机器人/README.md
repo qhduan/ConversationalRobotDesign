@@ -1,4 +1,9 @@
 
+## 文章问题
+
+- 一些地方论文格式写的是(作者, 论文标题, 年份)
+- 部分地方的说法和示例可能还有待推敲
+
 # 对话机器人技术简介
 
 自从iPhone 4S开始内置Siri，到现在各种智能音箱，或者扎克伯格说自己做的智能管家，
@@ -159,12 +164,15 @@ IR-based 问答系统 (IR: Information Retrieval)
 用户：好的，再见（User Dialog Act：bye()）  
 机器：再见，欢迎下次使用（Sys Dialog Act：bye()）
 
-Dialog Acts 如果是用户发起的（User Dialog Act），那么它是一种处理后的用户意图的某种系统化表达。
-The dialog act expresses an important component of the intention of the speaker (or writer) in saying what they said
+Dialog Acts 如果是用户发起的（User Dialog Act），
+那么它是一种处理后的用户意图的抽象表达，是一种形式化的意图描述。
 
-系统发起的行为，是根据用户行为，上下文信息等等综合得出的，下一步所要进行的操作系统化表达。
-（这句话说的好像不太对）
-Asking questions, giving orders, or making informational statements are things that people do in conversation, yet dealing with these kind of actions in dialogue what we will call dialog acts is something that the GUS-style frame-based dialog systems
+    The dialog act expresses an important component of the intention of the speaker (or writer) in saying what they said
+
+系统发起的行为（Sys Dialog Act），是根据用户行为，上下文信息等等综合得出的，
+下一步所要进行的操作的抽象表达，这个抽象表达后续会送入NLG部件，生成自然语言。
+
+    Asking questions, giving orders, or making informational statements are things that people do in conversation, yet dealing with these kind of actions in dialogue what we will call dialog acts is something that the GUS-style frame-based dialog systems
 
     GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel G. Bobrow, GUS, A Frame-Driven Dialog System, 1977)
 
@@ -213,8 +221,42 @@ Asking questions, giving orders, or making informational statements are things t
 最开始的希望通过图灵测试的机器人系统都有类似闲聊机器人的特征，例如Eliza(1964)，或者Alicebot(1995)。
 它们主要通过模板特征实现，也就是人工定义对话模板，产生类似智能的效果。
 
-这样的机器人模板其实可以很多，例如Alicebot有超过一万条AIML模板，并且实际上可以完成足够多闲聊对话。AIML，即人工智能标记语言，是用来通过定义模板实现机器人(闲聊)的一种方法。
+这样的机器人模板其实可以很多，例如Alicebot有超过六万条AIML模板来覆盖绝大部分日常对话。
+AIML，即人工智能标记语言，是用来通过定义模板实现机器人(闲聊)的一种方法。
 
-模板方法是机器人相关实现的最重要的方法（甚至可以没有之一），实际上在绝大多数的对话系统中都依然存在（Siri，小冰），并且在一些学术文献上被证明与其他系统相比依然拥有更好的效果（例如与 Neural Conversation 模型相比）。
+模板方法是机器人相关实现的最重要的方法（没有之一），实际上在绝大多数的对话系统中都依然存在（Siri，小冰），并且在一些学术文献上被证明与其他系统相比依然拥有更好的效果（例如与 Neural Conversation 模型相比）。
 
-与模板方法相对的，是基于深度学习的 Neural Conversation 模型，是一种基于神经机器翻译技术演变而来的对话生成模型。类似机器翻译，例如一句英文翻译为一句中文，对话中，上一句对话也可以“翻译”到下一句对话；类似的还有作诗机，上一句诗“翻译”出下一句诗。本质是根据统计学方法进行的一种文本生成。
+与模板方法相对的，是基于深度学习的 Neural Conversation 模型，是一种基于神经机器翻译技术演变而来的对话生成模型。类似机器翻译，例如一句英文翻译为一句中文，对话中，上一句对话也可以“翻译”到下一句对话；类似的还有作诗机，上一句诗“翻译”出下一句诗。
+
+本质是根据统计学方法进行的一种文本生成，这种文本生成往往会生成语法正确的句子。
+但语义、逻辑、一致话、发散性等地方会有问题。例如：
+
+人格不一致：
+
+```
+Q：你今年几岁
+A：我5岁了
+
+Q：你今年多大？
+A：我马上就满18了
+```
+
+语法正确但语义有问题：
+
+```
+Q：你想做我的女朋友吗
+A：我是我的女朋友
+```
+
+发散性差，本质机器倾向于回答简单又不容易出错的回答，相当于机器学会了一种投机取巧的方法：
+
+```
+Q：你喜欢我吗
+A：我不知道
+
+Q：今天天气不错
+A：我不知道
+
+Q：你是谁啊？
+A：我不知道
+```

@@ -22,8 +22,6 @@ mail (a) qhduan.com
 
 [对话机器人技术简介：问答系统、对话系统与聊天机器人](/对话机器人技术简介：问答系统、对话系统与聊天机器人)
 
-[什么是我所说的ConversationalRobot](/什么是我所说的ConversationalRobot)
-
 [聊天机器人：神经对话模型的实现与技巧](/聊天机器人：神经对话模型的实现与技巧)
 
 施工中，有生之年系列：
@@ -49,12 +47,16 @@ mail (a) qhduan.com
 
 ### 对话系统(dialogue system / dialog system)
 
-特指 task-oriented dialogue system ，也就是为了完成一种任务而发明的系统。
+特指 Task-oriented dialogue system ，也就是为了完成一种任务而发明的系统。
 这种任务的特征往往有：
 
 - 结果唯一，例如买一张机票，订一场电影，买一杯咖啡
 - 任务需要多项要素，例如机票需要时间、起始地、到达地；电影需要名称、电影院、场次时间；咖啡需要时间、大杯小杯、口味
 - 任务需要通过多轮对话、多轮反复确认达成，例如：你要大杯的咖啡还是小杯的？你需要几点送？你确定要9点送？
+
+主流对话系统研究集中在 GUS-style frame-based 类型的对话系统
+
+    GUS对话系统，是 Genial Understander System 的缩写，可以追溯到1977年的论文(Daniel G. Bobrow, GUS, A Frame-Driven Dialog System, 1977)
 
 ### 问答系统(question answering system)
 
@@ -64,15 +66,21 @@ mail (a) qhduan.com
 
 训练数据是纯粹的一问一答，类似各种FAQ。
 
-此类也被称为answer selection，answer ranking，answer sentence selection
+此类也被称为 Answer selection，Answer ranking，Answer sentence selection
 
-这种绝对不叫做“Knowledge based QA”，因为一问一答的数据，不构成知识，知识必须是有结构的、有属性的、互相有关联的数据。
+这种绝对不叫做“Knowledge based QA”，因为一问一答的数据，
+不构成知识，知识必须是有结构的、有属性的、互相有关联的数据。
+
+    Answer sentence selection is the task of identifying sentences that contain the answer to a given question. This is an important problem in its own right as well as in the larger context of open domain question answering.(Lei Yu, Deep Learning for Answer Sentence Selection, 2014)
+
+    We present a question answering (QA) system which learns how to detect and rank answer passages by analyzing questions and their answers (QA pairs) provided as training data.(Ganesh Ramakrishnan, Is Question Answering an Acquired Skill?, 2004)
 
 #### 基于知识的问答(knowledge based QA)
 
 学术上基本不区分基于知识的，还是基于知识图谱的（knowledge graph），因为知识图谱是谷歌提出的一个较商业概念。知识在传统上就是三元组，或类似的图结构，而知识图谱也是如此。
 
-这种方式，需要你提供一个知识库，例如一堆有关联的三元组（triples），它们可以存储于普通数据库或者专门的图数据库（graph databse），或者语义网相关的rdf数据库。
+这种方式，需要你提供一个知识库，例如一堆有关联的三元组（Triples），它们可以存储于普通数据库或者专门的图数据库（graph database），或者语义网相关的 RDF 数据库。
+[Wikipedia Triplestore](https://en.wikipedia.org/wiki/Triplestore)
 
 输入是自然语言，上下文是知识库，结果往往是知识库中的一个关系或者一个实体。
 
@@ -81,12 +89,16 @@ mail (a) qhduan.com
 (中国，有首都，北京)  
 (北京，是某国的首都，中国)  
 
-三元组的结构是（主，谓，宾），实际上是（实体，属性，属性值），或者（实体，关系，实体）结构。
+三元组的结构是（主，谓，宾），
+实际上是（实体，属性，属性值），
+或者（实体，关系，实体）结构。
+代表了一种两个节点，一个有属性的边的有向图结构。
 
 那么就可以解答用户输入“中国的首都是哪”，“北京是哪个国家的首都”，“中国与北京的关系”，这样的问题。
+这三个问题分别相当于查询(中国，有首都，？)，(北京，是某国首都，？)，(中国，？，北京)，
+其中问号“？”代指一种我们暂时不知道的变量，这种查询思想就是SPARQL的思想之一。
 
 为什么这是图结构，例如：
-
 
 (何云伟，师傅，郭德纲)  
 (曹云金，师傅，郭德纲)  
@@ -98,34 +110,53 @@ mail (a) qhduan.com
 所以这并不是简单的二维表模式（关系数据库模式），
 也不是树模式，因为兄弟节点有连接。
 
-（严格来说应该是有向图模式）
+（严格来说应该是有向图模式；图模式依然可以用传统数据库，如SQL、KV数据库来保存）
 
-#### 基于检索的问答（retrival-based QA）
+#### 基于检索的问答（Retrival-based QA）
 
-也可以说是 text-based 的
+也可以说是 Text-based 的
 
 问答输入是用户的一个问题，而上下文是一个或多个文字信息碎片。
 
-例如我们有百度百科关于“北京”的文章，假设我们并没有将这个文章知识化（三元组化），但是我们可以通过用户提问的关键字，预测用户可能期望的结果，从这个文章中找到答案。
+例如我们有百度百科关于“北京”的文章，假设我们并没有将这个文章知识化（三元组化），
+但是我们可以通过用户提问的关键字，预测用户可能期望的结果，从这个文章中找到答案。
 
-例如用户问“北京的面积”，那么我们可以检索文章中关于“面积、大小、范围”等信息的段落，并且我们猜测用户所需答案是一个“关于面积的数字”，那么我们就可以（可能）在这段关于北京的文章中找到答案。
+##### 一个简单搜索回答的流程
+
+假设用户问“北京的面积”。
+
+首先我们把这个问题进行一定变形，例如重点词是“北京”和“面积”。
+我们也可以对词进行同义词扩展，例如扩展成：北京，中国首都，面积，大小
+
+然后我们推理结果是，用户所需的回答类型应该是某个数字（代表面积的数字）。
+
+之后我们可以检索已有数据中和“北京”、“面积”相关的文章（这部分也可以利用搜索引擎，或者百科类网站）。
+
+有了这个文章作为上下文，我们就从文章中找到最接近问题的段落，
+并在段落中根据语义、答案类型等信息，提取出真正的答案，可能是一个实体、一个属性、或者一个短句。
 
 #### 其他类型问答
 
-例如输入一个图片，一个用户问题，用户询问“图上有什么”，“图里有谁”，“图里有苹果吗”。也就是系统要根据图片内容和用户提问，做出一定程度的推理。
+例如输入一个图片，一个用户问题，用户询问“图上有什么”，“图里有谁”，“图里有苹果吗”。
+也就是系统要根据图片内容和用户提问，做出一定程度的描述或推理。
 
-例如输入一段文字，外加个用户问题，就好像你做语文、英语的阅读理解那样的问答。文字就是文章，用户的问题就好像是考试的选择题。这算是一部分机器阅读理解的课题。
+例如输入一段文章，一个用户问题，就好像做语文、英语的阅读理解那样的问答，
+用户的问题就好像是阅读理解的选择题或者填空题。
+这也算是机器阅读理解的课题。
 
-学术上，问答也可以分为factoid QA和non-factoid QA。
-factoid就是答案往往是某个事实实体、简单的属性、关系的。例如地球到月亮有多远，中国有大面积，美国有多少人口这样。
+学术上，问答也可以分为 Factoid QA 和 Non-factoid QA。
+Factoid就是答案往往是某个事实实体、简单的属性、关系的。
+例如地球到月亮有多远，中国有大面积，美国有多少人口这样。
 
-non-factoid可以包含factoid问题，答案可以更发散。例如描述这辆车，计算这道数学题，给我你针对这件事儿的见解，给我提意见等等，这样答案并不明确或者并不是一个明确事实实体、关系的问答。
+Non-factoid 可以包含 Factoid 问题，答案可以更发散。
+例如描述下这辆车，计算这道数学题，给我你针对这件事儿的见解，给我提意见等等，
+这样答案并不明确或者并不是一个明确事实实体、关系的问答。
 
-一般基于知识的问答都是说factoid QA。
+一般基于知识（库）的问答都是说 Factoid QA。
 
 ### 聊天机器人（chatbot）
 
-也可以被成为non-task-oriented dialogue system，或者general dialogue system。
+也可以被成为 Non-task-oriented dialogue system，或者 General dialogue system。
 
 此类系统不需要完成一个明确任务（和上面的对话系统相反），它的存在目的往往只是为了尽可能的延长对话，并且完成一些的模糊的目标。例如排解用户无聊，打发时间，一些隐含的心理状况分析，鼓励用户，讨好用户。
 
