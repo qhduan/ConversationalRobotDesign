@@ -329,6 +329,12 @@ http://web.stanford.edu/~jurafsky/slp3/
 
 https://research.fb.com/downloads/babi/
 
+### Linkdin
+
+Linkdin在KDD2018上做的tutorial是我认为现在对话系统、QA最好的一个tutorial、简单survey，没有之一（截止18年）
+
+https://weibo.com/1402400261/Gw5DIykjj?type=repost#_rnd1535135595967
+
 ### 作者的其他相关链接
 
 [Sequence-to-Sequence模型的一个实现](https://github.com/qhduan/just_another_seq2seq)
