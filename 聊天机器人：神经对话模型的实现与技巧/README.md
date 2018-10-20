@@ -1,3 +1,37 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Sequence-to-Sequence 模型](#sequence-to-sequence-%E6%A8%A1%E5%9E%8B)
+    - [模型流程](#%E6%A8%A1%E5%9E%8B%E6%B5%81%E7%A8%8B)
+    - [Seq2Seq模型流程伪代码（python）](#seq2seq%E6%A8%A1%E5%9E%8B%E6%B5%81%E7%A8%8B%E4%BC%AA%E4%BB%A3%E7%A0%81python)
+    - [预测时](#%E9%A2%84%E6%B5%8B%E6%97%B6)
+    - [另一种解释](#%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%A7%A3%E9%87%8A)
+- [与神经机器翻译的异同](#%E4%B8%8E%E7%A5%9E%E7%BB%8F%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91%E7%9A%84%E5%BC%82%E5%90%8C)
+    - [embedding不同](#embedding%E4%B8%8D%E5%90%8C)
+    - [结果重复性不同](#%E7%BB%93%E6%9E%9C%E9%87%8D%E5%A4%8D%E6%80%A7%E4%B8%8D%E5%90%8C)
+    - [对称性不同](#%E5%AF%B9%E7%A7%B0%E6%80%A7%E4%B8%8D%E5%90%8C)
+    - [语料不同，与所产生的问题](#%E8%AF%AD%E6%96%99%E4%B8%8D%E5%90%8C%E4%B8%8E%E6%89%80%E4%BA%A7%E7%94%9F%E7%9A%84%E9%97%AE%E9%A2%98)
+    - [评价标准问题](#%E8%AF%84%E4%BB%B7%E6%A0%87%E5%87%86%E9%97%AE%E9%A2%98)
+- [技巧与提高（trick）](#%E6%8A%80%E5%B7%A7%E4%B8%8E%E6%8F%90%E9%AB%98trick)
+    - [抗语言模型与互信息模型](#%E6%8A%97%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%8E%E4%BA%92%E4%BF%A1%E6%81%AF%E6%A8%A1%E5%9E%8B)
+        - [抗语言(anti-language)损失函数](#%E6%8A%97%E8%AF%AD%E8%A8%80anti-language%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0)
+        - [互信息损失函数](#%E4%BA%92%E4%BF%A1%E6%81%AF%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0)
+    - [反转技巧](#%E5%8F%8D%E8%BD%AC%E6%8A%80%E5%B7%A7)
+    - [强化学习](#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0)
+    - [对抗学习](#%E5%AF%B9%E6%8A%97%E5%AD%A6%E4%B9%A0)
+    - [TFIDF技巧](#tfidf%E6%8A%80%E5%B7%A7)
+    - [上下文相似技巧](#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9B%B8%E4%BC%BC%E6%8A%80%E5%B7%A7)
+    - [分组技巧（buckets）](#%E5%88%86%E7%BB%84%E6%8A%80%E5%B7%A7buckets)
+- [工程级实战参考与提高](#%E5%B7%A5%E7%A8%8B%E7%BA%A7%E5%AE%9E%E6%88%98%E5%8F%82%E8%80%83%E4%B8%8E%E6%8F%90%E9%AB%98)
+    - [训练不同情绪的bot](#%E8%AE%AD%E7%BB%83%E4%B8%8D%E5%90%8C%E6%83%85%E7%BB%AA%E7%9A%84bot)
+    - [训练不同人格特征的bot](#%E8%AE%AD%E7%BB%83%E4%B8%8D%E5%90%8C%E4%BA%BA%E6%A0%BC%E7%89%B9%E5%BE%81%E7%9A%84bot)
+    - [语料处理](#%E8%AF%AD%E6%96%99%E5%A4%84%E7%90%86)
+    - [将语料分类，训练多个模型](#%E5%B0%86%E8%AF%AD%E6%96%99%E5%88%86%E7%B1%BB%E8%AE%AD%E7%BB%83%E5%A4%9A%E4%B8%AA%E6%A8%A1%E5%9E%8B)
+    - [如果可能的话，避免（现在）使用神经对话模型](#%E5%A6%82%E6%9E%9C%E5%8F%AF%E8%83%BD%E7%9A%84%E8%AF%9D%E9%81%BF%E5%85%8D%E7%8E%B0%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%A5%9E%E7%BB%8F%E5%AF%B9%E8%AF%9D%E6%A8%A1%E5%9E%8B)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 # Sequence-to-Sequence 模型
 

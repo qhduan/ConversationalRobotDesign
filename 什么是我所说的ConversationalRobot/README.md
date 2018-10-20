@@ -1,3 +1,28 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [导论：什么是我所说的 Conversational Robot](#%E5%AF%BC%E8%AE%BA%E4%BB%80%E4%B9%88%E6%98%AF%E6%88%91%E6%89%80%E8%AF%B4%E7%9A%84-conversational-robot)
+  - [Conversational Robot 的来历](#conversational-robot-%E7%9A%84%E6%9D%A5%E5%8E%86)
+  - [简单的来说](#%E7%AE%80%E5%8D%95%E7%9A%84%E6%9D%A5%E8%AF%B4)
+  - [从人机交互的角度看Conversational Robot](#%E4%BB%8E%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8Bconversational-robot)
+  - [从机器人的角度来看Conversational Robot](#%E4%BB%8E%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E8%A7%92%E5%BA%A6%E6%9D%A5%E7%9C%8Bconversational-robot)
+  - [内部组件，从Dialogue System的主要骨架说起](#%E5%86%85%E9%83%A8%E7%BB%84%E4%BB%B6%E4%BB%8Edialogue-system%E7%9A%84%E4%B8%BB%E8%A6%81%E9%AA%A8%E6%9E%B6%E8%AF%B4%E8%B5%B7)
+    - [语音识别（ASR）](#%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%ABasr)
+    - [自然语言理解（NLU or SLU or LU）](#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E7%90%86%E8%A7%A3nlu-or-slu-or-lu)
+    - [Dialogue State Tracker & Dialogue Policy](#dialogue-state-tracker--dialogue-policy)
+    - [自然语言生成 NLG](#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E7%94%9F%E6%88%90-nlg)
+    - [语音合成 TTS](#%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90-tts)
+  - [问答系统 QA System](#%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F-qa-system)
+    - [问答匹配 Question & Answer Selection/Matching/Searching](#%E9%97%AE%E7%AD%94%E5%8C%B9%E9%85%8D-question--answer-selectionmatchingsearching)
+    - [IR-based](#ir-based)
+    - [Knowledge-based](#knowledge-based)
+  - [Chatbot](#chatbot)
+    - [template-based](#template-based)
+    - [neural-based](#neural-based)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 
 # 导论：什么是我所说的 Conversational Robot

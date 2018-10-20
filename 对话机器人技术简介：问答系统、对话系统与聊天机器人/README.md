@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+  - [文章问题](#%E6%96%87%E7%AB%A0%E9%97%AE%E9%A2%98)
+- [对话机器人技术简介](#%E5%AF%B9%E8%AF%9D%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B)
+  - [机器人的作用之一是回答问题（Question Answering)](#%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B9%8B%E4%B8%80%E6%98%AF%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98question-answering)
+    - [一个最简单的问答系统](#%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F)
+    - [更好的回答问题，怎么回答“中国的首都？”](#%E6%9B%B4%E5%A5%BD%E7%9A%84%E5%9B%9E%E7%AD%94%E9%97%AE%E9%A2%98%E6%80%8E%E4%B9%88%E5%9B%9E%E7%AD%94%E4%B8%AD%E5%9B%BD%E7%9A%84%E9%A6%96%E9%83%BD)
+  - [知识图谱建模与查询](#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%BB%BA%E6%A8%A1%E4%B8%8E%E6%9F%A5%E8%AF%A2)
+    - [没数据的问答系统](#%E6%B2%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F)
+- [怎么让机器人帮我买咖啡（Dialogue System）](#%E6%80%8E%E4%B9%88%E8%AE%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%B8%AE%E6%88%91%E4%B9%B0%E5%92%96%E5%95%A1dialogue-system)
+- [让机器人陪我，聊天，闲聊（Chit Chat、Chatbot)](#%E8%AE%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%99%AA%E6%88%91%E8%81%8A%E5%A4%A9%E9%97%B2%E8%81%8Achit-chatchatbot)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 ## 文章问题
 
