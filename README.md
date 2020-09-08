@@ -1,6 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
 
 - [Conversational Robot](#conversational-robot)
 - [名词解释（非专业，非官方，非权威）](#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A%E9%9D%9E%E4%B8%93%E4%B8%9A%E9%9D%9E%E5%AE%98%E6%96%B9%E9%9D%9E%E6%9D%83%E5%A8%81)
@@ -14,8 +15,8 @@
   - [聊天机器人（chatbot）](#%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BAchatbot)
   - [DeepQA](#deepqa)
   - [人工智能标记语言，AIML](#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80aiml)
-    - [基于深度学习Sequence to Sequence的聊天机器人](#%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0sequence-to-sequence%E7%9A%84%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA)
-- [一个完整的Conversational UI（平台）需要的东西](#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84conversational-ui%E5%B9%B3%E5%8F%B0%E9%9C%80%E8%A6%81%E7%9A%84%E4%B8%9C%E8%A5%BF)
+    - [基于深度学习 Sequence to Sequence 的聊天机器人](#%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0sequence-to-sequence%E7%9A%84%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA)
+- [一个完整的 Conversational UI（平台）需要的东西](#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84conversational-ui%E5%B9%B3%E5%8F%B0%E9%9C%80%E8%A6%81%E7%9A%84%E4%B8%9C%E8%A5%BF)
 - [Dialogue System / Conversational UI 可能的资料](#dialogue-system--conversational-ui-%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B5%84%E6%96%99)
   - [平台](#%E5%B9%B3%E5%8F%B0)
     - [国外](#%E5%9B%BD%E5%A4%96)
@@ -31,14 +32,13 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
 # Conversational Robot
 
-作者不保证任何此repo内容的权威性，
+作者不保证任何此 repo 内容的权威性，
 对权威性又苛求，又对内容抱有兴趣的人，
-您可以先参考斯坦福的[这本书 28~30章](http://web.stanford.edu/~jurafsky/slp3/)
+您可以先参考斯坦福的[这本书 28~30 章](http://web.stanford.edu/~jurafsky/slp3/)
 
-这个repo会记录我对 Conversational Robot 的理解、学习、研究、设计、实现的相关内容
+这个 repo 会记录我对 Conversational Robot 的理解、学习、研究、设计、实现的相关内容
 
 如果有疑问、质疑、讨论需求：
 
@@ -62,7 +62,7 @@ mail (a) qhduan.com
 
 对话系统：完整对话系统构建
 
-聊天机器人：模板模型与AIML简介
+聊天机器人：模板模型与 AIML 简介
 
 问答系统：文本检索模型
 
@@ -79,7 +79,7 @@ mail (a) qhduan.com
 
 - 结果唯一，例如买一张机票，订一场电影，买一杯咖啡
 - 任务需要多项要素，例如机票需要时间、起始地、到达地；电影需要名称、电影院、场次时间；咖啡需要时间、大杯小杯、口味
-- 任务需要通过多轮对话、多轮反复确认达成，例如：你要大杯的咖啡还是小杯的？你需要几点送？你确定要9点送？
+- 任务需要通过多轮对话、多轮反复确认达成，例如：你要大杯的咖啡还是小杯的？你需要几点送？你确定要 9 点送？
 
 主流对话系统研究集中在 GUS-style frame-based 类型的对话系统
 
@@ -91,7 +91,7 @@ mail (a) qhduan.com
 
 也就是问题是一句话，回答是确定的一个词、一句话。
 
-训练数据是纯粹的一问一答，类似各种FAQ。
+训练数据是纯粹的一问一答，类似各种 FAQ。
 
 此类也被称为 Answer selection，Answer ranking，Answer sentence selection
 
@@ -114,7 +114,7 @@ mail (a) qhduan.com
 例如有知识库（三元组）：
 
 (中国，有首都，北京)  
-(北京，是某国的首都，中国)  
+(北京，是某国的首都，中国)
 
 三元组的结构是（主，谓，宾），
 实际上是（实体，属性，属性值），
@@ -123,21 +123,21 @@ mail (a) qhduan.com
 
 那么就可以解答用户输入“中国的首都是哪”，“北京是哪个国家的首都”，“中国与北京的关系”，这样的问题。
 这三个问题分别相当于查询(中国，有首都，？)，(北京，是某国首都，？)，(中国，？，北京)，
-其中问号“？”代指一种我们暂时不知道的变量，这种查询思想就是SPARQL的思想之一。
+其中问号“？”代指一种我们暂时不知道的变量，这种查询思想就是 SPARQL 的思想之一。
 
 为什么这是图结构，例如：
 
 (何云伟，师傅，郭德纲)  
 (曹云金，师傅，郭德纲)  
-(何云伟，师兄弟，曹云金)  
+(何云伟，师兄弟，曹云金)
 
-（师傅代表“有师傅”，或者has 师傅，师兄弟类似）
+（师傅代表“有师傅”，或者 has 师傅，师兄弟类似）
 
-上面三个实体，2种关系，构成了一个三角形的图。
+上面三个实体，2 种关系，构成了一个三角形的图。
 所以这并不是简单的二维表模式（关系数据库模式），
 也不是树模式，因为兄弟节点有连接。
 
-（严格来说应该是有向图模式；图模式依然可以用传统数据库，如SQL、KV数据库来保存）
+（严格来说应该是有向图模式；图模式依然可以用传统数据库，如 SQL、KV 数据库来保存）
 
 ### 基于检索的问答（Retrival-based QA）
 
@@ -172,7 +172,7 @@ mail (a) qhduan.com
 这也算是机器阅读理解的课题。
 
 学术上，问答也可以分为 Factoid QA 和 Non-factoid QA。
-Factoid就是答案往往是某个事实实体、简单的属性、关系的。
+Factoid 就是答案往往是某个事实实体、简单的属性、关系的。
 例如地球到月亮有多远，中国有大面积，美国有多少人口这样。
 
 Non-factoid 可以包含 Factoid 问题，答案可以更发散。
@@ -187,23 +187,23 @@ Non-factoid 可以包含 Factoid 问题，答案可以更发散。
 
 此类系统不需要完成一个明确任务（和上面的对话系统相反），它的存在目的往往只是为了尽可能的延长对话，并且完成一些的模糊的目标。例如排解用户无聊，打发时间，一些隐含的心理状况分析，鼓励用户，讨好用户。
 
-著名的Alice机器人中的一个模板，很好的描述了它的设计目的（bot.aiml)：
+著名的 Alice 机器人中的一个模板，很好的描述了它的设计目的（bot.aiml)：
 
 问："what do you need"  
-答："I would like to have a longer conversation with you."  
+答："I would like to have a longer conversation with you."
 
 翻译（东北）：
 
 问：你要干哈啊？  
-答：我想跟你多唠会儿磕。  
+答：我想跟你多唠会儿磕。
 
 ## DeepQA
 
-DeepQA一般指IBM开发的问答系统，它跟deep learning半分钱关系都没有。如果你觉得它跟deep learning有关系，可以想想 deep blue，就是那个IBM造出来下国际象棋的那个。
+DeepQA 一般指 IBM 开发的问答系统，它跟 deep learning 半分钱关系都没有。如果你觉得它跟 deep learning 有关系，可以想想 deep blue，就是那个 IBM 造出来下国际象棋的那个。
 
-既然是QA系统，也就是说它既不能帮你买咖啡也不能帮你订机票，它就只是一个问答系统。
+既然是 QA 系统，也就是说它既不能帮你买咖啡也不能帮你订机票，它就只是一个问答系统。
 
-它应用了很多问答系统的技术、技巧、工程方法，和海量的数据，DeepQA并不是一个你能简单用得到的系统，它既不免费，也不开源。
+它应用了很多问答系统的技术、技巧、工程方法，和海量的数据，DeepQA 并不是一个你能简单用得到的系统，它既不免费，也不开源。
 
 ## 人工智能标记语言，AIML
 
@@ -211,48 +211,47 @@ DeepQA一般指IBM开发的问答系统，它跟deep learning半分钱关系都�
 
 ```xml
 <category>
-  <pattern>YOU CAN DO BETTER</pattern>  
-  <template>Ok, I will try.</template>  
-</category>  
+  <pattern>YOU CAN DO BETTER</pattern>
+  <template>Ok, I will try.</template>
+</category>
 ```
 
 问题是“you can do better”，机器人会回答“ok, i will try”。
 
-当然实际上这个模板语言可以完成很多复杂的功能，包括而不限于：计算（例如1+1=？），数据库查询（通过调用其他接口），一些简单的嵌套等等。
+当然实际上这个模板语言可以完成很多复杂的功能，包括而不限于：计算（例如 1+1=？），数据库查询（通过调用其他接口），一些简单的嵌套等等。
 
-我可以很明确的说，这套系统基本上没什么用处，因为书写成本高，语法复杂，XML并不人类可读，优化少，相关资源很少，几乎很少的工业界支援，几乎已经被学术界放弃。
+我可以很明确的说，这套系统基本上没什么用处，因为书写成本高，语法复杂，XML 并不人类可读，优化少，相关资源很少，几乎很少的工业界支援，几乎已经被学术界放弃。
 
-注意我说的是AIML没用，没说模板方法没用，模板方法依然是现在构建一切bot最重要最重要最重要没有之一的手段。
+注意我说的是 AIML 没用，没说模板方法没用，模板方法依然是现在构建一切 bot 最重要最重要最重要没有之一的手段。
 
-这里列出几个你应该看看的AIML的代替品：
+这里列出几个你应该看看的 AIML 的代替品：
 
-[Rive Script](https://www.rivescript.com/)
+[RiveScript](https://www.rivescript.com/)
 
-[Super Script](https://github.com/superscriptjs/superscript)
+[SuperScript](https://github.com/superscriptjs/superscript)
 
-[Chat Script](https://github.com/bwilcox-1234/ChatScript)
+[ChatScript](https://github.com/bwilcox-1234/ChatScript)
 
-### 基于深度学习Sequence to Sequence的聊天机器人
+### 基于深度学习 Sequence to Sequence 的聊天机器人
 
 它本质是脱胎于神经机器翻译技术（Neural Machine Translation），也就是说本质是把机器翻译的一种语言的一句话到另一种语言的一句话的生成，改为聊天中上一句话到下一句话的生成。
 
-它几乎没什么用，甚至说都建议你先去看AIML是什么，都比在这耽误时间可能来的要好。
+它几乎没什么用，甚至说都建议你先去看 AIML 是什么，都比在这耽误时间可能来的要好。
 
-因为它：结果不可靠、质量不可控，高质量数据集少，trick多，对系统能补足的程度小，工程时间成本高，太过独立很难与其他部分契合，人格不一致，结果发散性低……
+因为它：结果不可靠、质量不可控，高质量数据集少，trick 多，对系统能补足的程度小，工程时间成本高，太过独立很难与其他部分契合，人格不一致，结果发散性低……
 
 并不是嘛玩意儿沾点深度学习就是好。
 
-
-# 一个完整的Conversational UI（平台）需要的东西
+# 一个完整的 Conversational UI（平台）需要的东西
 
 非官方、非权威、非专业！！！
 
-- ！ 易用、易学的QA Pairs管理与查询引擎
-  - 用于机器人管理者简单定义类似FAQ的问答，例如“怎么退货”这种有一个固定回答问题
+- ！ 易用、易学的 QA Pairs 管理与查询引擎
+  - 用于机器人管理者简单定义类似 FAQ 的问答，例如“怎么退货”这种有一个固定回答问题
 - ！ 易用、易学的对话模板生成管理方法（用于生成可能的用户说的话）
   - 机器人管理者用于生成针对对话系统（任务）的对话
-- ！ 足够使用的NLU部件
-  - 内部需要包括其他各种基本组件，例如intent classification，entity recognization
+- ！ 足够使用的 NLU 部件
+  - 内部需要包括其他各种基本组件，例如 intent classification，entity recognization
 - ！ 当机器人不准确、失效时，人工代替解决方案
   - 最好能即时接入人工，给用户接入人工的手段，即时评价当前对话质量，最低要求是提供其他人工渠道：电话、邮箱、IM
 - 足够使用的对话状态跟踪部件与对话策略部件
@@ -267,19 +266,19 @@ DeepQA一般指IBM开发的问答系统，它跟deep learning半分钱关系都�
   - 用于帮助专业人员构建更详细、自定义的机器人
 - 一个良好的、易懂的面向非专业人员培训文档
   - 用户普及知识，做简单的非专业训练，让他能够很好的管理基本问答、知识库
-- ～ 基于某种UI（例如web）的高级图形管理界面
+- ～ 基于某种 UI（例如 web）的高级图形管理界面
   - 方便非专业人员使用
 - ～ 自动的训练程序，例如基于强化学习的
   - 未测试
-- ～ 足够覆盖基本问答的chatbot引擎
+- ～ 足够覆盖基本问答的 chatbot 引擎
   - 回答一些非常基本机器人，你是谁，你从哪来，你到哪去，用于最基本的调戏、使用帮助目的
-- ～ 高效的Knowledge-based QA问答引擎
+- ～ 高效的 Knowledge-based QA 问答引擎
   - 用于更方便的回答例如，这个东西保修几年，这双鞋有多大码的，这种更细节的知识问题
-- ～ 一个简易的知识库构建与对接系统（如果需要Knowledge-based QA问答引擎的话）
-- ～ 较准确的Retrival-based QA问答引擎
+- ～ 一个简易的知识库构建与对接系统（如果需要 Knowledge-based QA 问答引擎的话）
+- ～ 较准确的 Retrival-based QA 问答引擎
   - 例如用于一些百科知识问答，某些特定领域的文档问答
-- ～～ 人类情绪分析部件（NLU中）
-- ～～ 一个基于Seq2Seq的chatbot引擎
+- ～～ 人类情绪分析部件（NLU 中）
+- ～～ 一个基于 Seq2Seq 的 chatbot 引擎
 - ～～ 语音识别
 - ～～ 人工语言合成
 
@@ -298,30 +297,31 @@ DeepQA一般指IBM开发的问答系统，它跟deep learning半分钱关系都�
 - wit.ai
 - api.ai
 - luis.ai
-- [国外客服](https://ada.support/)
+- [Ada Support](https://ada.support/)
+- [AIHelp](https://aihelp.net/)
 
 ### 国内
 
-- yige.ai
-- ruyi.ai
+- [Chatopera](https://bot.chatopera.com)
+- [ruyi.ai](http://ruyi.ai/)
 - UNIT
 - dueros
-- 思必驰dui开放平台
+- 思必驰 dui 开放平台
 
 ### 开源实现（机器人相关）：
 
-- 剑桥的开源DS [PyDial](http://www.camdial.org/pydial/)
-- 一个开源的DS [deepmipt/DeepPavlov](https://github.com/deepmipt/DeepPavlov)
-- 一个商业但开源的DS [Rasa Core](https://rasa.com)
+- 剑桥的开源 DS [PyDial](http://www.camdial.org/pydial/)
+- 一个开源的 DS [deepmipt/DeepPavlov](https://github.com/deepmipt/DeepPavlov)
+- 一个商业但开源的 DS [Rasa Core](https://rasa.com)
 - 比较简单的机器人[ChatterBot](https://github.com/gunthercox/ChatterBot)
-- 一个开源的QA系统，里面那个论文列表不错 [castorini/BuboQA](https://github.com/castorini/BuboQA)
-- AIML的公司 [pandorabots](https://home.pandorabots.com/en/)
+- 一个开源的 QA 系统，里面那个论文列表不错 [castorini/BuboQA](https://github.com/castorini/BuboQA)
+- AIML 的公司 [pandorabots](https://home.pandorabots.com/en/)
 
 ## 厂家
 
 ### 微软
 
-微软的cortana应该使用了很多相关技术
+微软的 cortana 应该使用了很多相关技术
 
 比较新的论文如
 
@@ -339,7 +339,7 @@ with supervised and reinforcement learning, 2017)
 
 Alexa Prize 相关的有一堆论文，例如下面这篇
 
-亚马逊的这些，我觉得更偏从QA角度设计DS
+亚马逊的这些，我觉得更偏从 QA 角度设计 DS
 
 (Huiting Liu, RubyStar: A Non-Task-Oriented Mixture Model Dialog System, 2017)
 
@@ -347,22 +347,22 @@ Alexa Prize 相关的有一堆论文，例如下面这篇
 
 剑桥大学有一个 [Dialogue Systems Group](http://dialogue.mi.eng.cam.ac.uk/) ，里面包括一些这个组发的会议论文
 
-他们还有一个项目叫 [PyDial](http://www.camdial.org/pydial/)  2017下半年的产物
+他们还有一个项目叫 [PyDial](http://www.camdial.org/pydial/) 2017 下半年的产物
 
 [还有这些课件](http://mi.eng.cam.ac.uk/~mg436/LectureSlides/)
 
 ### 脸书
 
-[BABI数据集，很多论文使用](https://research.fb.com/downloads/babi/)
+[BABI 数据集，很多论文使用](https://research.fb.com/downloads/babi/)
 
 ### Linkdin
 
-[Linkdin在KDD2018上做的tutorial是我认为现在对话系统、QA最好的一个tutorial、简单survey，没有之一（截止18年）](https://weibo.com/1402400261/Gw5DIykjj?type=repost#_rnd1535135595967)
+[Linkdin 在 KDD2018 上做的 tutorial 是我认为现在对话系统、QA 最好的一个 tutorial、简单 survey，没有之一（截止 18 年）](https://weibo.com/1402400261/Gw5DIykjj?type=repost#_rnd1535135595967)
 
 ### 作者的其他相关链接
 
-[Sequence-to-Sequence模型的一个实现](https://github.com/qhduan/just_another_seq2seq)
+[Sequence-to-Sequence 模型的一个实现](https://github.com/qhduan/just_another_seq2seq)
 
 ---
 
-graphml与一些图片文件是使用[yEd Live](https://www.yworks.com/yed-live/)制作
+graphml 与一些图片文件是使用[yEd Live](https://www.yworks.com/yed-live/)制作
